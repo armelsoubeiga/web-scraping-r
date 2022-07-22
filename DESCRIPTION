@@ -1,8 +1,0 @@
-Package: web-scraping-r
-Title: Collecte des Données Web avec R
-Version: 1.0.0.9000
-Authors@R: person("Armel", "SOUBEIGA", email = "armel.soubeiga@yahoo.fr", role = c("aut", "cre"))
-Depends: R (>= 4.0.2)
-Imports:
-    bookdown,
-    reticulate
