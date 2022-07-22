@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="french" xml:lang="french">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 1 Généralités sur le web scraping | R pour l’extraction de données sur le web : textes, images, tables et pdfs</title>
+  <meta name="description" content="Utilisation de R pour l’extraction des données sur le web." />
+  <meta name="generator" content="bookdown 0.25.5 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 1 Généralités sur le web scraping | R pour l’extraction de données sur le web : textes, images, tables et pdfs" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://r-webscraping.com//cover/coverface.jpg" />
+  <meta property="og:description" content="Utilisation de R pour l’extraction des données sur le web." />
+  <meta name="github-repo" content="armelsoubeiga/web-scraping-r" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 1 Généralités sur le web scraping | R pour l’extraction de données sur le web : textes, images, tables et pdfs" />
+  
+  <meta name="twitter:description" content="Utilisation de R pour l’extraction des données sur le web." />
+  <meta name="twitter:image" content="https://r-webscraping.com//cover/coverface.jpg" />
+
+<meta name="author" content="Armel SOUBEIGA" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="les-technologies-web-1.0-vs-web-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R pour l'extraction de données sur le web</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Avant-propos</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#à-quoi-attendre-de-ce-livre"><i class="fa fa-check"></i>À quoi attendre de ce livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-du-livre"><i class="fa fa-check"></i>Structure du livre</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#ressources-et-scripts"><i class="fa fa-check"></i>Ressources et scripts</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#remerciements"><i class="fa fa-check"></i>Remerciements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#dévouement"><i class="fa fa-check"></i>Dévouement</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-propos-de-lauteur"><i class="fa fa-check"></i>A propos de l’auteur</a></li>
+</ul></li>
+<li class="part"><span><b>I Généralités<span></span></b></span></li>
+<li class="chapter" data-level="1" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html"><i class="fa fa-check"></i><b>1</b> Généralités sur le web scraping</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#définitions"><i class="fa fa-check"></i><b>1.1</b> Définitions</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#data-scraping"><i class="fa fa-check"></i><b>1.1.1</b> Data Scraping</a></li>
+<li class="chapter" data-level="1.1.2" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#le-web-scraping"><i class="fa fa-check"></i><b>1.1.2</b> Le web scraping</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#justification"><i class="fa fa-check"></i><b>1.2</b> Justification</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#collecter-des-données-rapidement-et-automatiquement"><i class="fa fa-check"></i><b>1.2.1</b> Collecter des données rapidement et automatiquement</a></li>
+<li class="chapter" data-level="1.2.2" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#a-quoi-sert-le-web-scraping-au-sein-dune-entreprise"><i class="fa fa-check"></i><b>1.2.2</b> A quoi sert le web scraping au sein d’une entreprise ?</a></li>
+<li class="chapter" data-level="1.2.3" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#la-surveillance-des-prix"><i class="fa fa-check"></i><b>1.2.3</b> La surveillance des prix</a></li>
+<li class="chapter" data-level="1.2.4" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#étude-de-marché"><i class="fa fa-check"></i><b>1.2.4</b> Étude de marché</a></li>
+<li class="chapter" data-level="1.2.5" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#apprentissage-automatique"><i class="fa fa-check"></i><b>1.2.5</b> Apprentissage automatique</a></li>
+<li class="chapter" data-level="1.2.6" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#surveillance-des-actualités"><i class="fa fa-check"></i><b>1.2.6</b> Surveillance des actualités</a></li>
+<li class="chapter" data-level="1.2.7" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#analyse-des-sentiments-et-relation-client"><i class="fa fa-check"></i><b>1.2.7</b> Analyse des sentiments et relation client</a></li>
+<li class="chapter" data-level="1.2.8" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#marketing-par-courriel-et-la-prospection"><i class="fa fa-check"></i><b>1.2.8</b> Marketing par courriel et la prospection</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#légalité"><i class="fa fa-check"></i><b>1.3</b> Légalité</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#avertissement"><i class="fa fa-check"></i><b>1.3.1</b> AVERTISSEMENT</a></li>
+<li class="chapter" data-level="1.3.2" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#aperçu"><i class="fa fa-check"></i><b>1.3.2</b> Aperçu</a></li>
+<li class="chapter" data-level="1.3.3" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#comment-éviter-les-ennuis"><i class="fa fa-check"></i><b>1.3.3</b> Comment éviter les ennuis ?</a></li>
+<li class="chapter" data-level="1.3.4" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#analyse-dun-fichier-robots.txt"><i class="fa fa-check"></i><b>1.3.4</b> Analyse d’un fichier robots.txt</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#outils-et-méthodes"><i class="fa fa-check"></i><b>1.4</b> Outils et méthodes</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#les-bases-du-web-scraping"><i class="fa fa-check"></i><b>1.4.1</b> Les Bases du web scraping</a></li>
+<li class="chapter" data-level="1.4.2" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#comment-démarrer-un-projet-de-web-scraping"><i class="fa fa-check"></i><b>1.4.2</b> Comment démarrer un projet de web scraping</a></li>
+<li class="chapter" data-level="1.4.3" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#quelles-compétences-pour-développer-son-web-scraper"><i class="fa fa-check"></i><b>1.4.3</b> Quelles compétences pour développer son web scraper ?</a></li>
+<li class="chapter" data-level="1.4.4" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#quelle-alternative-si-vous-navez-pas-de-compétences-techniques"><i class="fa fa-check"></i><b>1.4.4</b> Quelle alternative si vous n’avez pas de compétences techniques ?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="généralités-sur-le-web-scraping.html"><a href="généralités-sur-le-web-scraping.html#prérequis"><i class="fa fa-check"></i><b>1.5</b> Prérequis</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html"><i class="fa fa-check"></i><b>2</b> Les technologies web 1.0 vs web 2.0</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#le-web-1.0-le-web-statique"><i class="fa fa-check"></i><b>2.1</b> Le web 1.0 : le web statique</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#la-communication-web-client-serveur"><i class="fa fa-check"></i><b>2.1.1</b> La communication web client-serveur</a></li>
+<li class="chapter" data-level="2.1.2" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#http-règles-de-communication-web"><i class="fa fa-check"></i><b>2.1.2</b> HTTP : règles de communication web</a></li>
+<li class="chapter" data-level="2.1.3" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#exploration-http-avec-r"><i class="fa fa-check"></i><b>2.1.3</b> Exploration HTTP avec R</a></li>
+<li class="chapter" data-level="2.1.4" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#les-urls"><i class="fa fa-check"></i><b>2.1.4</b> Les URLs</a></li>
+<li class="chapter" data-level="2.1.5" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#conception-de-base-du-web-dynamique"><i class="fa fa-check"></i><b>2.1.5</b> Conception de base du web dynamique</a></li>
+<li class="chapter" data-level="2.1.6" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#les-aspects-clés-de-lextraction-automatisée-de-données-web"><i class="fa fa-check"></i><b>2.1.6</b> Les aspects clés de l’extraction automatisée de données web</a></li>
+<li class="chapter" data-level="2.1.7" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#api-et-site-web-dynamique"><i class="fa fa-check"></i><b>2.1.7</b> API et site web dynamique</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="les-technologies-web-1.0-vs-web-2.html"><a href="les-technologies-web-1.0-vs-web-2.html#en-conclusion"><i class="fa fa-check"></i><b>2.2</b> En conclusion</a></li>
+</ul></li>
+<li class="part"><span><b>II La collecte des données sans APIs<span></span></b></span></li>
+<li class="chapter" data-level="3" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html"><i class="fa fa-check"></i><b>3</b> Introduction au web scraping</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#les-logiciels-de-web-scraping-gratuits"><i class="fa fa-check"></i><b>3.1</b> Les logiciels de web scraping gratuits</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#comment-faire-du-web-scraping-avec-r"><i class="fa fa-check"></i><b>3.2</b> Comment faire du web-scraping avec R ?</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#identifier-les-éléments-dintérêt-dans-une-page"><i class="fa fa-check"></i><b>3.3</b> Identifier les éléments d’intérêt dans une page</a></li>
+<li class="chapter" data-level="3.4" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#les-packages-r-dédiées-au-web-scraping"><i class="fa fa-check"></i><b>3.4</b> Les packages R dédiées au web scraping</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#lextraction-des-données-avec-le-package-rvest"><i class="fa fa-check"></i><b>3.5</b> L’extraction des données avec le package rvest</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#lextraction-des-données-avec-le-package-rcrawler"><i class="fa fa-check"></i><b>3.6</b> L’extraction des données avec le package Rcrawler</a></li>
+<li class="chapter" data-level="3.7" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#lextraction-des-données-avec-le-package-rselenium"><i class="fa fa-check"></i><b>3.7</b> L’extraction des données avec le package RSelenium</a></li>
+<li class="chapter" data-level="3.8" data-path="introduction-au-web-scraping.html"><a href="introduction-au-web-scraping.html#la-différence-entre-rvest-et-rselenium"><i class="fa fa-check"></i><b>3.8</b> La différence entre rvest et RSelenium</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="le-scraping-2.0-pour-le-web-dynamique.html"><a href="le-scraping-2.0-pour-le-web-dynamique.html"><i class="fa fa-check"></i><b>4</b> Le Scraping 2.0 pour le web dynamique</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="le-scraping-2.0-pour-le-web-dynamique.html"><a href="le-scraping-2.0-pour-le-web-dynamique.html#comment-scraper-un-site-web-dynamique"><i class="fa fa-check"></i><b>4.1</b> Comment scraper un site web dynamique ?</a></li>
+<li class="chapter" data-level="4.2" data-path="le-scraping-2.0-pour-le-web-dynamique.html"><a href="le-scraping-2.0-pour-le-web-dynamique.html#cookies"><i class="fa fa-check"></i><b>4.2</b> Cookies</a></li>
+<li class="chapter" data-level="4.3" data-path="le-scraping-2.0-pour-le-web-dynamique.html"><a href="le-scraping-2.0-pour-le-web-dynamique.html#ajax-et-xhr"><i class="fa fa-check"></i><b>4.3</b> AJAX et XHR</a></li>
+<li class="chapter" data-level="4.4" data-path="le-scraping-2.0-pour-le-web-dynamique.html"><a href="le-scraping-2.0-pour-le-web-dynamique.html#selenium"><i class="fa fa-check"></i><b>4.4</b> Selenium</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="cas-pratiques-des-projets-dextraction-de-données-textuelles.html"><a href="cas-pratiques-des-projets-dextraction-de-données-textuelles.html"><i class="fa fa-check"></i><b>5</b> Cas pratiques : des projets d’extraction de données textuelles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="cas-pratiques-des-projets-dextraction-de-données-textuelles.html"><a href="cas-pratiques-des-projets-dextraction-de-données-textuelles.html#projet-1-données-dun-site-de-e-commerce"><i class="fa fa-check"></i><b>5.1</b> Projet 1 : données d’un site de e-commerce</a></li>
+<li class="chapter" data-level="5.2" data-path="cas-pratiques-des-projets-dextraction-de-données-textuelles.html"><a href="cas-pratiques-des-projets-dextraction-de-données-textuelles.html#projet-2-collecte-de-coorpus-paire-pour-un-modèle-de-traduction"><i class="fa fa-check"></i><b>5.2</b> Projet 2 : Collecte de coorpus paire pour un modèle de traduction</a></li>
+<li class="chapter" data-level="5.3" data-path="cas-pratiques-des-projets-dextraction-de-données-textuelles.html"><a href="cas-pratiques-des-projets-dextraction-de-données-textuelles.html#projet-3-collecte-de-données-pour-un-système-de-recommandation"><i class="fa fa-check"></i><b>5.3</b> Projet 3 : Collecte de données pour un système de recommandation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="cas-pratiques-des-projets-dextraction-de-tableaux-de-données.html"><a href="cas-pratiques-des-projets-dextraction-de-tableaux-de-données.html"><i class="fa fa-check"></i><b>6</b> Cas pratiques : des projets d’extraction de tableaux de données</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="cas-pratiques-des-projets-dextraction-de-tableaux-de-données.html"><a href="cas-pratiques-des-projets-dextraction-de-tableaux-de-données.html#projet-1-extration-des-tables-statistiques-du-football"><i class="fa fa-check"></i><b>6.1</b> Projet 1 : Extration des tables statistiques du Football</a></li>
+<li class="chapter" data-level="6.2" data-path="cas-pratiques-des-projets-dextraction-de-tableaux-de-données.html"><a href="cas-pratiques-des-projets-dextraction-de-tableaux-de-données.html#projet-2-les-tableaux-statistiques-sur-lemploi-du-bls"><i class="fa fa-check"></i><b>6.2</b> Projet 2 : Les tableaux statistiques sur l’emploi du BLS</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cas-pratiques-des-projets-dextraction-des-images-et-pdfs.html"><a href="cas-pratiques-des-projets-dextraction-des-images-et-pdfs.html"><i class="fa fa-check"></i><b>7</b> Cas pratiques : des projets d’extraction des images et pdfs</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="cas-pratiques-des-projets-dextraction-des-images-et-pdfs.html"><a href="cas-pratiques-des-projets-dextraction-des-images-et-pdfs.html#projet-1-waxclassification---collecte-dimages-pour-une-app-dia"><i class="fa fa-check"></i><b>7.1</b> Projet 1 : WaxClassification - Collecte d’images pour une app d’IA</a></li>
+<li class="chapter" data-level="7.2" data-path="cas-pratiques-des-projets-dextraction-des-images-et-pdfs.html"><a href="cas-pratiques-des-projets-dextraction-des-images-et-pdfs.html#projet-2-reporthub---collecte-de-rapports-annuels-dentreprises"><i class="fa fa-check"></i><b>7.2</b> Projet 2 : ReportHub - Collecte de rapports annuels d’entreprises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="automatisation-de-scrapers-sur-le-cloud-ou-serveur-local.html"><a href="automatisation-de-scrapers-sur-le-cloud-ou-serveur-local.html"><i class="fa fa-check"></i><b>8</b> Automatisation de scrapers sur le cloud ou serveur local</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="automatisation-de-scrapers-sur-le-cloud-ou-serveur-local.html"><a href="automatisation-de-scrapers-sur-le-cloud-ou-serveur-local.html#google-cloud-et-lautomatisation-du-scraping"><i class="fa fa-check"></i><b>8.1</b> Google Cloud et l’automatisation du scraping</a></li>
+<li class="chapter" data-level="8.2" data-path="automatisation-de-scrapers-sur-le-cloud-ou-serveur-local.html"><a href="automatisation-de-scrapers-sur-le-cloud-ou-serveur-local.html#mon-ordinateur-et-lautomatisation-du-scraping"><i class="fa fa-check"></i><b>8.2</b> Mon ordinateur et l’automatisation du scraping</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="le-package-de-scraping-afnews.html"><a href="le-package-de-scraping-afnews.html"><i class="fa fa-check"></i><b>9</b> Le package de scraping afnews</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="le-package-de-scraping-afnews.html"><a href="le-package-de-scraping-afnews.html#présentation-de-afnews"><i class="fa fa-check"></i><b>9.1</b> Présentation de afnews</a></li>
+<li class="chapter" data-level="9.2" data-path="le-package-de-scraping-afnews.html"><a href="le-package-de-scraping-afnews.html#installation"><i class="fa fa-check"></i><b>9.2</b> Installation</a></li>
+</ul></li>
+<li class="part"><span><b>III APIs scraping<span></span></b></span></li>
+<li class="chapter" data-level="10" data-path="le-web-scraping-avancé-avec-api.html"><a href="le-web-scraping-avancé-avec-api.html"><i class="fa fa-check"></i><b>10</b> Le web scraping avancé avec API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="le-web-scraping-avancé-avec-api.html"><a href="le-web-scraping-avancé-avec-api.html#le-rôle-des-apis-web-pour-lextraction-des-données"><i class="fa fa-check"></i><b>10.1</b> Le rôle des APIs web pour l’extraction des données</a></li>
+<li class="chapter" data-level="10.2" data-path="le-web-scraping-avancé-avec-api.html"><a href="le-web-scraping-avancé-avec-api.html#une-api-au-lieu-dun-web-scraper"><i class="fa fa-check"></i><b>10.2</b> Une API au lieu d’un web scraper</a></li>
+<li class="chapter" data-level="10.3" data-path="le-web-scraping-avancé-avec-api.html"><a href="le-web-scraping-avancé-avec-api.html#les-apis-web-publiquement-accessible"><i class="fa fa-check"></i><b>10.3</b> Les APIs web publiquement accessible</a></li>
+<li class="chapter" data-level="10.4" data-path="le-web-scraping-avancé-avec-api.html"><a href="le-web-scraping-avancé-avec-api.html#api-cassée"><i class="fa fa-check"></i><b>10.4</b> API cassée</a></li>
+<li class="chapter" data-level="10.5" data-path="le-web-scraping-avancé-avec-api.html"><a href="le-web-scraping-avancé-avec-api.html#les-apis-web-fermés"><i class="fa fa-check"></i><b>10.5</b> Les APIs web fermés</a></li>
+</ul></li>
+<li class="part"><span><b>IV Les robots Crawlers du web<span></span></b></span></li>
+<li class="chapter" data-level="11" data-path="le-minage-et-lexploration-du-web.html"><a href="le-minage-et-lexploration-du-web.html"><i class="fa fa-check"></i><b>11</b> Le minage et l’exploration du web</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="le-minage-et-lexploration-du-web.html"><a href="le-minage-et-lexploration-du-web.html#les-avantages-dun-robot-dexploration-web"><i class="fa fa-check"></i><b>11.1</b> Les avantages d’un robot d’exploration web</a></li>
+<li class="chapter" data-level="11.2" data-path="le-minage-et-lexploration-du-web.html"><a href="le-minage-et-lexploration-du-web.html#lalgorithme-de-base-dun-crawler"><i class="fa fa-check"></i><b>11.2</b> L’algorithme de base d’un crawler</a></li>
+<li class="chapter" data-level="11.3" data-path="le-minage-et-lexploration-du-web.html"><a href="le-minage-et-lexploration-du-web.html#mise-en-œuvre-pratique"><i class="fa fa-check"></i><b>11.3</b> Mise en œuvre pratique</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="limplémentation-dun-robot-crawler.html"><a href="limplémentation-dun-robot-crawler.html"><i class="fa fa-check"></i><b>12</b> L’implémentation d’un robot Crawler</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="limplémentation-dun-robot-crawler.html"><a href="limplémentation-dun-robot-crawler.html#les-problèmes-de-mise-en-œuvre-dun-robot-crawler"><i class="fa fa-check"></i><b>12.1</b> Les problèmes de mise en œuvre d’un robot crawler</a></li>
+<li class="chapter" data-level="12.2" data-path="limplémentation-dun-robot-crawler.html"><a href="limplémentation-dun-robot-crawler.html#limplémentation-dun-crawler-avec-rcrawler"><i class="fa fa-check"></i><b>12.2</b> L’implémentation d’un crawler avec Rcrawler</a></li>
+</ul></li>
+<li class="part"><span><b>V Bibliographie<span></span></b></span></li>
+<li class="chapter" data-level="" data-path="référence-bibliographique.html"><a href="référence-bibliographique.html"><i class="fa fa-check"></i>Référence bibliographique</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R pour l’extraction de données sur le web : textes, images, tables et pdfs</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="généralités-sur-le-web-scraping" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapitre 1</span> Généralités sur le web scraping<a href="généralités-sur-le-web-scraping.html#généralités-sur-le-web-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="définitions" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Définitions<a href="généralités-sur-le-web-scraping.html#définitions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-scraping" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Data Scraping<a href="généralités-sur-le-web-scraping.html#data-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le data scraping (capture, collecte ou extraction de données en français) est une technique par laquelle un programme informatique extrait des informations depuis une source lisible par un humain et produite par un autre programme informatique. Il permet d’extraire des données et les structurer depuis une source où l’information n’est ni structurée (pour un programme), ni documentée (pour un ordinateur), et non optimisée pour être extraite facilement (pour un humain).</p>
+<p>Il existe plusieurs types de data scraping parmi lesquels le <strong>screen scraping</strong> (extraction des données depuis un écran), le <strong>report mining</strong> (extraction des données depuis un rapport en fichier texte) et le plus répandu, le <strong>web scraping</strong>.</p>
+</div>
+<div id="le-web-scraping" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Le web scraping<a href="généralités-sur-le-web-scraping.html#le-web-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le web scraping est une méthode automatique qui permet d’extraire de grandes quantités de données à partir de sites web , via le protocole HTTP (le protocole de communication du web). La plupart de ces données sont des données non structurées au format <strong>HTML</strong> qui sont ensuite converties en données structurées dans un tableur ou une base de données afin de pouvoir être utilisées dans diverses applications.</p>
+<p><img src="images/img6.jpg" /></p>
+<p>Cette image ci-dessus illustre clairement la définition du web scraping. Un web scraper, prend en entrée des sites web et retourne des données bien structurées.</p>
+<p>Il existe nombreuses manières d’effectuer du web scraping pour obtenir des données à partir des sites web : l’utilisation des services en ligne, des APIs (interface de programmation d’application) particulières ou même la création de votre code de web scraping à partir de zéro. Dans ce cas, vous devez écrire un script qui automatisera tout le processus, avec <strong>R</strong>, par exemple.</p>
+</div>
+</div>
+<div id="justification" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Justification<a href="généralités-sur-le-web-scraping.html#justification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Maintenant que vous avez une idée de ce qu’est-ce le web scraping, dans cette section, nous allons étudier son importance et ses domaines d’application.</p>
+<p><em>Pourquoi web scraper ?</em>, — A travers ce graphique, Stephen nous montre l’intérêt croissant pour le web scraping sur ces dernières années.</p>
+<img src="images/img7.png" />
+<small>
+<center>
+<span>Intérêt pour le web scrqping depuis 10 ans par <u>Stephen MESNILDREY</u><a href="https://www.sales-hacking.com/"></span>
+</center>
+<p></small></p>
+<p></br></p>
+<blockquote>
+<p>Généralement, la collecte de données sur le web est utilisée par les personnes et les entreprises qui veulent utiliser la vaste quantité de données disponibles sur le web pour prendre des décisions plus intelligentes. —</p>
+<p><strong>Stephen MESNILDREY</strong></p>
+<p>CEO &amp; Fondateur de <a href="https://www.sales-hacking.com/">sales-hacking.co</a></p>
+</blockquote>
+<div id="collecter-des-données-rapidement-et-automatiquement" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Collecter des données rapidement et automatiquement<a href="généralités-sur-le-web-scraping.html#collecter-des-données-rapidement-et-automatiquement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Imaginez que vous vouliez déterminer le prix moyen des romans vendus sur <a href="https://livre.fnac.com/s20/Roman-et-Nouvelles">le site de la Fnac</a>. Vous devez pour cela récupérer le prix de chaque livre à la vente. Vous pouvez essayer de les recopier à la main dans un fichier Excel, ou bien les copier-coller si vous voulez gagner un peu de temps. Mais vous sentez-vous prêt à parcourir les centaines de pages du site de la Fnac ?</p>
+<p>Si la réponse est non, alors le web scraping est la solution qu’il vous faut. Le web-scraping vous permettra de collecter ces données :</p>
+<ul>
+<li>automatiquement</li>
+<li>rapidement</li>
+<li>en grande quantité.</li>
+</ul>
+</div>
+<div id="a-quoi-sert-le-web-scraping-au-sein-dune-entreprise" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> A quoi sert le web scraping au sein d’une entreprise ?<a href="généralités-sur-le-web-scraping.html#a-quoi-sert-le-web-scraping-au-sein-dune-entreprise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le web scraping est une technique qui a de multiples applications business. Il est utile dans la plupart des secteurs d’activités, sinon tous. En récupérant des informations, l’entreprise comprend mieux son environnement : le comportement de ses concurrents, de ses clients, les évolutions de marché, etc.</p>
+</div>
+<div id="la-surveillance-des-prix" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> La surveillance des prix<a href="généralités-sur-le-web-scraping.html#la-surveillance-des-prix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le web scraping peut être utilisé par les entreprises pour récupérer les données des produits concurrents et ensuite de les utiliser pour fixer le prix optimal de leurs produits afin d’obtenir un revenu maximal.</p>
+<p><strong>Un exemple</strong> : <a href="https://www.courir.com/">Courir.com</a>, le retailer de chaussures, peut surveiller les prix pratiqués par son concurrent direct <a href="https://www.footlocker.fr/fr/">Foot Locker</a> en examinant les prix fixés pour les mêmes modèles sur son site web.</p>
+</div>
+<div id="étude-de-marché" class="section level3 hasAnchor" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Étude de marché<a href="généralités-sur-le-web-scraping.html#étude-de-marché" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les entreprises peuvent utiliser le web scraping pour leurs études de marché. Les données de haute qualité obtenues en grands volumes peuvent être très utiles aux entreprises pour analyser les tendances de consommation et comprendre dans quelle direction l’entreprise doit se diriger à l’avenir.</p>
+<p>Exemple : un fabricant peut analyser le nombre de commentaires des acheteurs sur une marketplace (comme Amazon) à propos des produits similaires aux siens. En analysant leurs avis, il peut ensuite adapter son offre à la popularité de certains produits.</p>
+</div>
+<div id="apprentissage-automatique" class="section level3 hasAnchor" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> Apprentissage automatique<a href="généralités-sur-le-web-scraping.html#apprentissage-automatique" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les modèles d’apprentissage automatique ont besoin de données brutes pour évoluer et s’améliorer en précision. L’apprentissage automatique alimente les merveilles technologiques d’aujourd’hui, comme les voitures sans conducteur, les vols spatiaux, la reconnaissance d’images et de la parole. Cependant, ces modèles ont besoin d’énormément de données variées pour améliorer leur précision et leur fiabilité. C’est là le principal intérêt du web scraping. Ils peuvent permettre de collecter en un temps record une grande variété de données, de textes, d’images et des tables en un temps relativement court, pour alimenter automatiquement ces modèles.</p>
+</div>
+<div id="surveillance-des-actualités" class="section level3 hasAnchor" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> Surveillance des actualités<a href="généralités-sur-le-web-scraping.html#surveillance-des-actualités" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le web scraping des sites d’actualités peut fournir des rapports détaillés sur l’actualité à une entreprise. C’est d’autant plus essentiel pour les entreprises du secteur du journalisme ou qui dépendent de l’actualité quotidienne pour leur fonctionnement. Après tout, les rapports d’actualité peuvent faire ou défaire une entreprise en une seule journée.</p>
+</div>
+<div id="analyse-des-sentiments-et-relation-client" class="section level3 hasAnchor" number="1.2.7">
+<h3><span class="header-section-number">1.2.7</span> Analyse des sentiments et relation client<a href="généralités-sur-le-web-scraping.html#analyse-des-sentiments-et-relation-client" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Si les entreprises veulent comprendre le sentiment général des consommateurs à l’égard de leurs produits, l’analyse des sentiments est indispensable. Les entreprises peuvent utiliser le web scraping pour collecter des données à partir des réseaux sociaux tels que Facebook, Twitter et sur leur propre site, ou le site web des concurents afin de connaître le sentiment général sur leurs produits. Cela les aidera à créer des produits que les gens désirent et à prendre de l’avance sur leurs concurrents.</p>
+<p>En effet, le web scraping peut être implémenté sur le site de l’entreprise, mais aussi sur les sites de ses retailers. On peut ainsi compiler les avis exprimés par les usagers à travers le monde.</p>
+<p>Ces commentaires sont une source d’informations cruciales. Ils sont analysés avec R ou Python grâce au NLP (Natural Language Processing). Les informations obtenues permettent d’améliorer la relation clients en comprenant mieux leurs attentes.</p>
+</div>
+<div id="marketing-par-courriel-et-la-prospection" class="section level3 hasAnchor" number="1.2.8">
+<h3><span class="header-section-number">1.2.8</span> Marketing par courriel et la prospection<a href="généralités-sur-le-web-scraping.html#marketing-par-courriel-et-la-prospection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les entreprises peuvent également utiliser le web scraping pour le marketing par e-mail ou par le calling. Elles peuvent collecter les contacts (adresse e-mail ou numéro de téléphone) à partir de divers sites en utilisant le web scraping afin de constituer un fichier de prospection.</p>
+</div>
+</div>
+<div id="légalité" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Légalité<a href="généralités-sur-le-web-scraping.html#légalité" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="avertissement" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> AVERTISSEMENT<a href="généralités-sur-le-web-scraping.html#avertissement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>CE DOCUMENT NE CONSTITUE PAS UN CONSEIL JURIDIQUE PROFESSIONNEL CONCERNANT L’EXTRACTION AUTOMATISÉE DE DONNÉES DU WEB (C’EST-À-DIRE LE WEB SCRAPING). IL EST UNIQUEMENT À TITRE D’INFORMATION ET PRÉSENTE UN APERÇU DES ASPECTS JURIDIQUES ET ÉTHIQUES QUI POURRAIENT ÊTRE IMPORTANTS DANS LE CONTEXTE DES PRATIQUES DE SCRAPING WEB.</p>
+</div>
+<div id="aperçu" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Aperçu<a href="généralités-sur-le-web-scraping.html#aperçu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La véritable question est de savoir comment vous comptez utiliser les données que vous avez extraites d’un site web (manuellement ou à l’aide d’un logiciel).</p>
+<p>En effet, les données affichées par la plupart des sites web sont destinées à la consommation publique. Il est tout à fait légal de copier ces informations.</p>
+<p>Cependant, les processus de web scraping doivent respecter les conditions d’utilisation et les déclarations de copyright des sites web cibles.</p>
+<p>De plus, les web scrapers peuvent lire et extraire des données de pages web plus rapidement que les humains, il convient de veiller à ce que le processus n’affecte en aucune manière les performances ou la bande passante du serveur web.</p>
+<p><strong>Mais sur un plan juridique les choses ne sont pas aussi simples.</strong></p>
+<p>Le site web <a href="https://fr.wikipedia.org/wiki/Web_scraping">wikipedia - web scraping - Légalité</a>, mentionne des cas de procès et leurs issues aux États-Unis et en Europe.</p>
+</div>
+<div id="comment-éviter-les-ennuis" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Comment éviter les ennuis ?<a href="généralités-sur-le-web-scraping.html#comment-éviter-les-ennuis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les règles sont simples :</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Lisez attentivement les conditions d’utilisation de la page web que vous souhaitez scraper.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Ne soyez pas trop agressif en utilisant une fréquence élevée d’extraction.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Assurez-vous que vous n’avez pas d’autre choix que de gratter. Autrement dit, si la ressource web a une API, utilisez-la au lieu de gratter.</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Assurez-vous que le scraping est légal et éthique sur le site web. Vous pouvez verifier cela à travers les fichiers <code>robots.txt</code> (le protocole d’exclusion des robots).</li>
+</ol></li>
+</ul>
+</div>
+<div id="analyse-dun-fichier-robots.txt" class="section level3 hasAnchor" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Analyse d’un fichier robots.txt<a href="généralités-sur-le-web-scraping.html#analyse-dun-fichier-robots.txt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le protocole d’exclusion des robots, plus connu sous le nom de <code>robots.txt</code>, est une convention visant à empêcher les robots d’exploration (les web crawlers, qu’on abordera dans le dernier chapitre) d’accéder à tout ou une partie d’un site web. Et pour être dans la légalité de scraper, vous pouvez vous aussi analyser ce fichier. Le package R <code>robotstxt</code>, fournit en effet des fonctions, pour accéder à ce fichier (généralement situé dans la racine du site) et d’analyser les autorisations.
+<a href="http://robots-txt.com/">En savoir plus sur robots.txt</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="généralités-sur-le-web-scraping.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Librarie</span></span>
+<span id="cb1-2"><a href="généralités-sur-le-web-scraping.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;robotstxt&quot;</span>)</span>
+<span id="cb1-3"><a href="généralités-sur-le-web-scraping.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="généralités-sur-le-web-scraping.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Acceder au fichier robots.txt</span></span>
+<span id="cb1-5"><a href="généralités-sur-le-web-scraping.html#cb1-5" aria-hidden="true" tabindex="-1"></a>rt <span class="ot">&lt;-</span> <span class="fu">get_robotstxt</span>(<span class="at">domain =</span> <span class="st">&quot;https://wikipedia.org/&quot;</span>)</span>
+<span id="cb1-6"><a href="généralités-sur-le-web-scraping.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="généralités-sur-le-web-scraping.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">paths_allowed</span>(<span class="at">paths =</span> <span class="fu">c</span>(<span class="st">&quot;https://wikipedia.org/&quot;</span>))</span></code></pre></div>
+<pre><code>## 
+ wikipedia.org</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Si vous avez une réponse <code>TRUE</code>, cela veut dire que vous avez des autorisations d’extraction du contenu. A noter que, uniquement une partie du site web peut être autorisée, donc vous devriez vérifier presque tous les urls du sites web.</p>
+<p>L’image ci-dessous, nous montre les autorisations d’accès aux contenus d’un site web protège avec un robots.txt contrairement à un site web qui n’en procède pas. En effet, un robot d’indexation de site web (comme celui de Google ou de Yahoo) ne pourrait pas accéder à certains répertoires empêchés par le robots.txt (l’image à droite). Dans le cadre d’une extraction du contenu de ce dernier, on ne doit pas scraper les pages (répertoires) dont l’accès n’est pas autorisé par le robots.txt.</p>
+<p><img src="images/img65.png" /></p>
+</div>
+</div>
+<div id="outils-et-méthodes" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Outils et méthodes<a href="généralités-sur-le-web-scraping.html#outils-et-méthodes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Il existe une multitude d’outils sous forme d’extensions, de Frameworks (infrastructure logicielle) ou de logiciels sur le marché pour scraper un site web.</p>
+<div id="les-bases-du-web-scraping" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Les Bases du web scraping<a href="généralités-sur-le-web-scraping.html#les-bases-du-web-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’extraction des données web, fonctionne généralement en 2 parties. Une première partie (<strong>crawler</strong>) d’exploration et de collecte des liens des pages d’intérêts. Une deuxième partie (<strong>scraper</strong>) d’extraction des contenus sur les pages explorées. Mais en fonction des projets, la première partie n’est pas généralement utilisée.</p>
+<ul>
+<li><p><strong>Web crawler</strong> : il guide le web scraper à travers les adresses web. Un web crawler est un robot automatisé qui parcourt les sites web pour lister et stocker l’ensemble des URL entrantes ou sortantes de chaque page.</p></li>
+<li><p><strong>Web scraper</strong> : il collecte et extrait les données sur les URLs spécifiées par le web crawler. Un web scraper est un programme ou outil automatisé qui parcourt des listes définies de sites web pour en extraire le contenu à partir de la structure HTML des pages.</p></li>
+</ul>
+<p>Il est donc important de connaître la structure et l’identification des éléments d’intérêts d’une page web.</p>
+</div>
+<div id="comment-démarrer-un-projet-de-web-scraping" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Comment démarrer un projet de web scraping<a href="généralités-sur-le-web-scraping.html#comment-démarrer-un-projet-de-web-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Voici à quoi ressemble un processus général de web scraping:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Identifier un site web dont vous souhaitez collecter des données</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Collecter les URL des pages que vous voulez extraire des données (en recupérant le fichier <a href="#le-sitemap-pour-le-scraping"><code>sitemaps.xml</code></a> par exemple).</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Faire une requête sur ces URL pour obtenir le code HTML de la page.</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Utiliser des sélecteurs pour trouver les données dans le code HTML.</li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>Enregistrer les données dans un format structuré.</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: decimal">
+<li>Procéder à l’automatisation de votre collecte ou à la création d’un API vers une autre application.</li>
+</ol></li>
+</ul>
+<p><em>Cela paraît simple, non ?</em> — Oui, c’est simple ! Si vous avez uniquement un petit projet. Mais malheureusement, vous devez relever un certain nombre de défis si vous avez besoin de collecter des données à grande échelle.</p>
+<p>Par exemple :</p>
+<ul>
+<li>actualiser le web scraper si la structure du site web change,</li>
+<li>gérer les proxies, c’est-à-dire bouclé sur des adresses IP pour rester anonyme envers les serveurs web, sinon au risque de se voir éjecter,</li>
+<li>exécuter du code javascript,</li>
+<li>remplir des formulaires à travers du codes R,</li>
+<li>ou encore contourner des cookies ou des détecteurs de bots.</li>
+<li>automatiser l’exécution sur le cloud ou d’autres serveurs</li>
+</ul>
+<p>Ce sont tous des problèmes profondément techniques qui peuvent mobiliser de nombreuses ressources. C’est en partie la raison pour laquelle de nombreuses entreprises choisissent d’externaliser la réalisation de ce type de projet.</p>
+</div>
+<div id="quelles-compétences-pour-développer-son-web-scraper" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Quelles compétences pour développer son web scraper ?<a href="généralités-sur-le-web-scraping.html#quelles-compétences-pour-développer-son-web-scraper" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tout comme chacun peut construire un site web, chacun peut construire son propre web scraper.</p>
+<p>Cependant, les techniques disponibles pour construire votre propre web scraper nécessitent des connaissances en programmation R, Python, PHP ou Javascript par exemple.</p>
+<p>Des Frameworks notamment en R vous permettent de créer des solutions entièrement personnalisables et 100% gratuites. Il convient que ce type de solution inclut qu’une personne dans votre entreprise soit en mesure de les développer et de les maintenir.</p>
+</div>
+<div id="quelle-alternative-si-vous-navez-pas-de-compétences-techniques" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> Quelle alternative si vous n’avez pas de compétences techniques ?<a href="généralités-sur-le-web-scraping.html#quelle-alternative-si-vous-navez-pas-de-compétences-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans le prochain chapitre, nous allons découvrir également quelques-uns des outils d’extensions de navigateur pour le web scraping et de logiciels que vous pouvez installer sur votre ordinateur. A noter que contrairement aux Frameworks cités plus haut, avec ces solutions vous n’aurez pas besoin de savoir programmer, mais elles sont moins personnalisables et limitées en fonction de vos besoins.</p>
+</div>
+</div>
+<div id="prérequis" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Prérequis<a href="généralités-sur-le-web-scraping.html#prérequis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Le code contenu dans les pages suivantes est accessible aux lecteurs ayant une connaissance de base en <strong>R</strong>, ou familiarisé à la boîte d’outils analytique (python, Julia, SAS, etc.). Les non-codeurs (chef de projet data, etc) peuvent également obtenir des informations utiles. Les connaissances sur les formats de données <strong>JSON et JavaScript</strong> sont essentiels. Des connaissances en développement web ou sur la structure d’un site web sont également des atouts.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="les-technologies-web-1.0-vs-web-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/armelsoubeiga/web-scraping-r/edit/master/01.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r-web-scraping.pdf", "r-web-scraping.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>
